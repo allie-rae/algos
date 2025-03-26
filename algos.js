@@ -67,3 +67,66 @@ function sortedSquaredArray(array) {
   }
   return squaredArray;
 }
+
+// Tournament Winner - Return the winning team of the tournament
+// Solution 1
+function tournamentWinner(competitions, results) {
+  const teamScores = {};
+
+  for (let i = 0; i < competitions.length; i++) {
+    if (!(competitions[i][0] in teamScores)) {
+      teamScores[competitions[i][0]] = 0;
+    }
+    if (!(competitions[i][1] in teamScores)) {
+      teamScores[competitions[i][1]] = 0;
+    }
+    if (results[i]) {
+      teamScores[competitions[i][0]] = teamScores[competitions[i][0]] + 3;
+    } else {
+      teamScores[competitions[i][1]] = teamScores[competitions[i][1]] + 3;
+    }
+  }
+
+  let winner = "";
+  let winnerScore = 0;
+
+  for (const [key, value] of Object.entries(teamScores)) {
+    if (winnerScore < value) {
+      winner = key;
+      winnerScore = value;
+    }
+  }
+
+  return winner;
+}
+
+// Solution 2
+function tournamentWinner(competitions, results) {
+  const teamScores = {};
+  let winner = "";
+  let winnerScore = 0;
+
+  for (let i = 0; i < competitions.length; i++) {
+    if (!(competitions[i][0] in teamScores)) {
+      teamScores[competitions[i][0]] = 0;
+    }
+    if (!(competitions[i][1] in teamScores)) {
+      teamScores[competitions[i][1]] = 0;
+    }
+    if (results[i]) {
+      teamScores[competitions[i][0]] = teamScores[competitions[i][0]] + 3;
+      if (teamScores[competitions[i][0]] > winnerScore) {
+        winner = competitions[i][0];
+        winnerScore = teamScores[competitions[i][0]];
+      }
+    } else {
+      teamScores[competitions[i][1]] = teamScores[competitions[i][1]] + 3;
+      if (teamScores[competitions[i][1]] > winnerScore) {
+        winner = competitions[i][1];
+        winnerScore = teamScores[competitions[i][1]];
+      }
+    }
+  }
+
+  return winner;
+}
