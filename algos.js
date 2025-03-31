@@ -130,3 +130,21 @@ function tournamentWinner(competitions, results) {
 
   return winner;
 }
+
+// Non-Constructible Change - Return the minimum amount of change that cannot be created
+function nonConstructibleChange(coins) {
+  let sortedCoins = coins.sort((a, b) => a - b);
+  if (sortedCoins[0] !== 1) {
+    return 1;
+  }
+
+  let change = 0;
+  for (let i = 0; i < sortedCoins.length; i++) {
+    if (sortedCoins[i] > change + 1) {
+      return change + 1;
+    }
+    change = change + sortedCoins[i];
+  }
+
+  return change + 1;
+}
