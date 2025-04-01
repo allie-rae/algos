@@ -148,3 +148,18 @@ function nonConstructibleChange(coins) {
 
   return change + 1;
 }
+
+// Transpose Matrix - You're given a 2D array of integers matrix. Write a function that returns the transpose of the matrix.
+function transposeMatrix(matrix) {
+  const width = matrix[0].length;
+  const height = matrix.length;
+  const transposedMatrix = new Array(width).fill(null).map((_) => new Array());
+
+  for (let row = 0; row < height; row++) {
+    for (let col = 0; col < width; col++) {
+      transposedMatrix[col][row] = matrix[row][col];
+    }
+  }
+
+  return transposedMatrix;
+}
