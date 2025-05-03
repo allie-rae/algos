@@ -163,3 +163,27 @@ function transposeMatrix(matrix) {
 
   return transposedMatrix;
 }
+
+// Three number sum - Write a function that takes in a non-empty array of integers and an integer representing a target sum. The function should find all triplets in the array that sum up to the target sum and return them in a 2D array.
+function threeNumberSum(array, targetSum) {
+  array.sort((a, b) => a - b);
+  let triplets = [];
+
+  for (let i = 0; i < array.length - 2; i++) {
+    let left = i + 1;
+    let right = array.length - 1;
+
+    while (left < right) {
+      if (array[i] + array[left] + array[right] === targetSum) {
+        triplets.push([array[i], array[left], array[right]]);
+        left = left + 1;
+        right = right - 1;
+      } else if (array[i] + array[left] + array[right] < targetSum) {
+        left = left + 1;
+      } else {
+        right = right - 1;
+      }
+    }
+  }
+  return triplets;
+}
